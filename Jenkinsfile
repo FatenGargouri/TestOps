@@ -2,28 +2,29 @@ pipeline {
     agent any
 
     tools {
-        nodejs "nodejs"  // NodeJS installation configured in Jenkins
+        nodejs "nodejs"  // NodeJS installation configurée dans Jenkins
     }
 
     environment {
-        CHROME_BIN = '/bin/google-chrome'  // Set the Chrome binary path
+        CHROME_BIN = '/bin/google-chrome'  // Chemin du binaire Chrome
     }
 
     stages {
-        stage('Dependencies') {
+        stage('Install Dependencies') {
             steps {
-                sh 'npm i'  // Install Node.js dependencies
+                // Installer les dépendances nécessaires
+                sh 'sudo apt-get update'
+                sh 'sudo apt-get install -y xvfb'
+                sh 'npm i'
             }
         }
 
-        stage('e2e Tests') {
-            parallel {
-                stage('Test 1') {
-                    steps {
-                        // Run Cypress tests located in 'cypress/e2e/TestCases/Test1'
-                        sh 'npx cypress run --spec cypress/e2e/TestCases/TestCases/*'
-                    }
-                }
+        stage('Run e2e Tests') {
+            steps {
+                // Exécuter tous les tests Cypress dans le dossier TestCases avec Xvfb
+                sh '''
+                    xvfb-run -a npx cypress run --spec cypress/e2e/TestCases/**
+                '''
             }
         }
 
