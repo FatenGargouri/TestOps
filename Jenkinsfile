@@ -20,7 +20,7 @@ pipeline {
         stage('Run e2e Tests') {
             steps {
                 // Run all Cypress tests in the TestCases folder
-                sh 'npx cypress run --spec cypress/e2e/TestCases/**'
+                sh 'npx cypress run --headless --spec "cypress/e2e/TestCases/**/*.cy.js"'
             }
         }
 
