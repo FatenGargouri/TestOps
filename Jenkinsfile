@@ -13,18 +13,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install necessary dependencies
-                sh 'apt-get update'
-                sh 'apt-get install -y xvfb'
                 sh 'npm i'
             }
         }
 
         stage('Run e2e Tests') {
             steps {
-                // Run all Cypress tests in the TestCases folder with Xvfb
-                sh '''
-                    xvfb-run -a npx cypress run --spec cypress/e2e/TestCases/**
-                '''
+                // Run all Cypress tests in the TestCases folder
+                sh 'npx cypress run --spec cypress/e2e/TestCases/**'
             }
         }
 
