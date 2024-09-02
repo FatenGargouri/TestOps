@@ -1,21 +1,20 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/included:13.13.3'  // Image Docker avec Cypress et toutes les dépendances
+            image 'cypress/base:12.18.2' // Use an appropriate Cypress Docker image
+            args '-u root' // Run as root if necessary
         }
     }
-
     stages {
-        stage('Run e2e Tests') {
+        stage('Install Dependencies') {
             steps {
-                // Exécuter les tests Cypress en mode headless dans le conteneur Docker
-                sh 'npx cypress run --headless --spec "cypress/e2e/TestCases/**/*.cy.js"'
+                sh 'npm install' // Install project dependencies
             }
         }
-
-        stage('Deploy') {
+        stage('Run Cypress Tests') {
             steps {
-                echo 'Deploying....'
+                // Specify the path to your test cases
+                sh 'npx cypress run --spec "cypress/e2e/TestCases/**/*.cy.js"' // Adjust the pattern if needed
             }
         }
     }
