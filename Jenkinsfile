@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/base:12.18.2' // Use an appropriate Cypress Docker image
+            image 'cypress/base:16.13.0' // Update to a compatible Cypress Docker image
             args '-u root' // Run as root if necessary
         }
     }
@@ -13,9 +13,9 @@ pipeline {
         }
         stage('Run Cypress Tests') {
             steps {
-                // Specify the path to your test cases
                 sh 'npx cypress run --spec "cypress/e2e/TestCases/**/*.cy.js"' // Adjust the pattern if needed
             }
         }
     }
 }
+
