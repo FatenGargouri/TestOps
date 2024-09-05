@@ -10,7 +10,8 @@ pipeline {
             steps {
                 // Clear Cypress cache to avoid permission issues
                 // sh 'rm -rf /root/.cache/Cypress'
-                sh 'npm install' // Install project dependencies
+                sh 'npm install' 
+                sh 'cypress install'// Install project dependencies
             }
         }
         stage('Run Cypress Tests') {
