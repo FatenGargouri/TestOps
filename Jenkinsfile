@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/base:16' // Use a compatible Cypress Docker image with Node 16
-            args '-u root' // Run as root if necessary
+            image 'cypress/base:16'
+            args ' '
         }
     }
     stages {
