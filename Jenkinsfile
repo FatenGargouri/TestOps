@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/browsers:node20.5.0-chrome113-ff113-edge' // Ensure Node.js 20.x is used
+            image 'cypress/included:latest' // Ensure Node.js 20.x is used
             args '--entrypoint="" -u 0:0' // Disable entrypoint and run as root user
         }
     }
