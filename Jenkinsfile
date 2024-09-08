@@ -1,24 +1,24 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/included:12.17.1' // Updated to a valid image
-            args '-u 0:0' // To run as root user, necessary for permission issues inside container
+            image 'cypress/browsers:node20.5.0-chrome113-ff113-edge' // Ensure Node.js 20.x is used
+            args '--entrypoint="" -u 0:0' // Disable entrypoint and run as root user
         }
     }
     environment {
-        // Set environment variables if needed
         CYPRESS_BASE_URL = 'https://naveenautomationlabs.com/opencart/index.php?route=account/login'
         REPORT_DIR = 'cypress/reports'
     }
     stages {
+        
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'npm install' // Install project dependencies
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'npx cypress run' // This runs your Cypress tests
+                sh 'npx cypress run' // Runs Cypress tests
             }
         }
         stage('Generate Report') {
@@ -31,7 +31,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'cypress/reports/**/*', allowEmptyArchive: true
-            junit 'cypress/reports/*.xml' // If you generate JUnit reports, otherwise skip this
+            junit 'cypress/reports/*.xml' // Archive JUnit reports if any
         }
     }
 }
