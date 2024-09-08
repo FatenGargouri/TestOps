@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/browsers:node20.6.1-chrome113-ff113-edge' // Updated to a valid image
+            image 'cypress/browsers:node20.5.0-chrome113-ff113-edge' // Updated to a valid image
             args '-u 0:0' // To run as root user, necessary for permission issues inside container
         }
     }
