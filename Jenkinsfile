@@ -1,13 +1,9 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/included:latest' // Ensure Node.js 20.x is used
-            args '--entrypoint="" -u 0:0' // Disable entrypoint and run as root user
+            image 'cypress/base:latest' // Ensure Node.js 20.x is used
+            //args '--entrypoint="" -u 0:0' // Disable entrypoint and run as root user
         }
-    }
-    environment {
-        CYPRESS_BASE_URL = 'https://naveenautomationlabs.com/opencart/index.php?route=account/login'
-        REPORT_DIR = 'cypress/reports'
     }
     stages {
         
