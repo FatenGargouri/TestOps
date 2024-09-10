@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'cypress/base:latest' // Ensure Node.js 20.x is used
-            //args '--entrypoint="" -u 0:0' // Disable entrypoint and run as root user
+            args '--entrypoint="" -u 0:0' // Run as root
         }
     }
     stages {
