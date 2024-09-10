@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/base:latest' // Ensure Node.js 20.x is used
+            image 'bitnami/cypress:latest' // Ensure Node.js 20.x is used
             args '--entrypoint="" -u 0:0' // Run as root
         }
     }
